@@ -1,0 +1,51 @@
+#登录界面定位信息
+url地址:
+  #['http://www.baidu.com']
+  ['http://192.168.1.102:8086/']
+输入登陆用户名:
+  ['id','TxtName']
+输入登录密码:
+  ['id','TxtPwd']
+点击登录:
+  ['id','login_button']
+错误信息提示:
+  ['xpath',"//div[@class='error mtip']/span"]
+  
+
+#公共选项
+点击新增:
+  ['xpath',"//a[@id='add']/span/span[1]"]
+点击删除:
+  ['xpath',"//a[@id='del']/span/span"]
+确定删除:
+  ['xpath',"//div[@class='messager-button']/a[1]/span/span"]
+点击编辑:
+  ['xpath',"//a[@id='edit']/span/span"]
+点击查询:
+  ['xpath',"//a[@id='search_btn']/span/span"]
+点击提交:
+  ['xpath',"//a[@id='submit']/span/span"]
+点击关闭:
+  ['xpath',"//a[@id='close']/span/span[@class='l-btn-icon icon-ok']"]
+富文本框:
+  ['xpath',"//html/body[@class='view']"]
+
+
+#首页定位信息
+iframe:
+  ['xpath',"//html/body/div[@class='panel layout-panel layout-panel-center']/div/div/div[@class='tabs-panels']/div[2]/div/div/iframe"] 
+选择个人事务:
+  ['xpath',"//div[@class='panel-title panel-with-icon'][contains(text(),'个人事务')]"]
+选择公告栏:
+  ['xpath',"//span[@class='tree-title' and contains(text(),'公告栏')]"]
+选择公告浏览:
+  ['id','aa8f9daac-b325-4f12-802c-f5bd7cc35e83']
+  
+  
+#公告栏
+公告类别名:
+  ['id',"Name"] 
+公告栏管理员:
+  ['id','FuzerenName']
+公告发布人:
+  ['id','Faburen']
