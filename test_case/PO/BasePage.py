@@ -42,6 +42,8 @@ class Action(object):
             self.capture_screenshot(captureName)
             print  Name + u"操作：运行失败！请查看截图快照："+ captureName
             
+            self.driver.quit()
+            
     def open(self,key):
         data = self.get_value(key)
         self.driver.get(data)
@@ -104,7 +106,7 @@ class Action(object):
         isSucceed = False
         try:
             #定位到要悬停的元素
-            click = self.driver.find_element(key)
+            click = self.find_element(key)
             ActionChains(self.driver).double_click(click).perform()
             isSucceed = True
         except BaseException, e:
@@ -114,24 +116,29 @@ class Action(object):
 
     def switch_frame(self, frame):
         #重写switch_frame方法
-        isSucceed = False
+        #isSucceed = False
         try:
-            self.driver.switch_to_default_content()      #退出frame，切换到新的frame
-            return self.driver.switch_to_frame(frame)
+            self.driver.switch_to_default_content()     #退出frame，切换到新的frame
+            self.driver.switch_to_frame(frame)
+            #isSucceed = True
         except BaseException, e:
             print e
-        self.operation_check('iframe切换',isSucceed)
+        #self.operation_check(u'切换到'+ frame,isSucceed)
         
     def iframe(self,key):
-        isSucceed = False
+        #isSucceed = False
         try:
             self.driver.switch_to_default_content()
-            frame = self.find_element(key)#('xpath',"//html/body/div[@class='panel layout-panel layout-panel-center']/div/div/div[@class='tabs-panels']/div[2]/div/div/iframe")
+            frame = self.find_element(key)
             self.driver.switch_to_frame(frame)
-            isSucceed = True
+            #isSucceed = True
         except BaseException, e:
             print e    
-        self.operation_check(key,isSucceed)
+        #self.operation_check(u'切换到主页面'+ key,isSucceed)
+        
+    def text(self,key):
+        data = self.get_value(key)
+        return self.driver.find_element(data[0],data[1]).text
         
     def select_main_menu(self,key1,key2,key3):
         if key1 == u'选择个人事务':
@@ -144,10 +151,11 @@ class Action(object):
             self.click(key3)
                
     def execute_script(self,key):
-            #调用JavaScript
+        #调用JavaScript
+        data = self.get_value(key)
         isSucceed = False
         try:
-            self.driver.except_script(key)
+            self.driver.except_script(data)
             isSucceed = True
         except BaseException, e:
             print e
@@ -158,8 +166,12 @@ class Action(object):
         #检查页面上的元素是否存在
         data = self.get_value(key)
         try:
-            self.driver.find_element(data[0],data[1])
+            WebDriverWait(self.driver, 3).until(lambda driver: driver.find_element(data[0],data[1]))
             return True
         except:
             return False
+        finally:
+            print u'<----------本条用例运行结束---------->'
+            print ''
+
         

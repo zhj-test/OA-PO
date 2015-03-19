@@ -12,42 +12,60 @@ class public_page(BasePage.Action):
             data = value[key]
             return data    
         except KeyError:
-            print 'location_element文件中找不到%s' %key
+            print u'location_element文件中找不到%s' %key
     
     def login(self,name,password):
+        self.open(u'url地址')
+        print ''
         self.send_keys(u'输入登陆用户名',name)
         self.send_keys(u'输入登录密码',password)
         self.click(u'点击登录')
     
     def add(self):
-        self.click('点击新增')
+        self.click(u'点击新增')
         self.switch_frame("frame_0")
         
     def delete(self):
-        self.click('点击删除')
+        self.click(u'点击删除')
         time.sleep(1)
-        self.click('确定删除')
+        self.click(u'确定删除')
+        self.iframe('iframe')
+        time.sleep(3)
         
     def edit(self):
-        self.click('点击编辑')
+        self.click(u'点击编辑')
         self.switch_frame("frame_0")
     
     def quert(self):
-        self.click('点击查询')
+        self.click(u'点击查询')
         
     def submit(self):    
-        self.click('点击提交')
+        self.click(u'点击提交')
+        self.iframe('iframe')
     
     def close(self):
-        self.click('点击关闭')
+        self.click(u'点击关闭')
         
-    def ueditor(self,key,text,ueditor='ueditor_0'): 
-        self.switch_frame(ueditor)
+    def ueditor(self,text,ueditor='ueditor_0'):
+        self.driver.switch_to_frame(ueditor) 
+        #self.switch_frame(ueditor)
         self.send_keys(u'富文本框',text)
         time.sleep(1)
         self.switch_frame('frame_0')
         
     def quit(self):
+        print u"---------------所有用例运行完毕退出---------------"
         self.driver.quit()
-        self.assertEqual([], self.verificationErrors)
-        print u"+用例运行完毕退出"
+        #self.assertEqual([], self.verificationErrors)
+        
+    
+    def error_quit(self):
+        print u"该条用例数据验证失败，退出"
+        self.driver.quit()
+        raise IndexError
+    
+
+        
+        
+        
+        
