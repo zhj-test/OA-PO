@@ -1,4 +1,4 @@
-#登录界面定位信息
+#---------------登录界面定位信息---------------
 url地址:
   #['http://www.baidu.com']
   ['http://192.168.1.102:8086/']
@@ -12,7 +12,7 @@ url地址:
   ['xpath',"//div[@class='error mtip']/span"]
   
 
-#公共选项
+#---------------公共选项---------------
 点击新增:
   ['xpath',"//a[@id='add']/span/span[1]"]
 点击删除:
@@ -40,7 +40,7 @@ url地址:
   ['xpath',"//div[@class='datagrid-cell datagrid-cell-c3-RealName'][contains(text(),'管理员')]"]
 
 
-#首页定位信息
+#---------------首页定位信息---------------
 iframe:
   ['xpath',"//html/body/div[@class='panel layout-panel layout-panel-center']/div/div/div[@class='tabs-panels']/div[2]/div/div/iframe"] 
 选择个人事务:
@@ -58,9 +58,21 @@ iframe:
   ['id','ad87db3c8-d524-4d1c-9aa0-120ec662de75']
 新闻浏览:
   ['id','ad404f757-b336-41d8-ad7d-070657d3ebda']
-  
-  
-#公告栏
+
+车辆管理:
+  ['xpath',"//span[@class='tree-title' and contains(text(),'车辆管理')]"]
+车辆类型管理:
+  ['id','ad5f78158-7ff7-43ce-8cf7-557b3e5e3ccd']
+车辆信息管理:
+  ['id','a1e29a89f-ac52-410a-9d81-022f52d35189']
+车辆维护管理:
+  ['id','a7ae0e5ae-ab36-4e71-91c1-0c363579a13c']
+车辆使用申请:
+  ['id','ac54e4b53-dc1d-42c8-a57a-c3b14aa9bdb7']
+车辆使用管理:
+  ['id','a46904ee4-0d42-4bb1-90a1-0b39fd5ae6ac']
+
+#---------------公告栏---------------
 公告类别名:
   ['id',"Name"] 
 公告栏管理员:
@@ -78,7 +90,7 @@ iframe:
 
   
   
-#新闻管理
+#---------------新闻管理---------------
 点击发布:
   ['xpath',".//*[@id='fb']/span/span[1]"]
 确定发布:
@@ -98,4 +110,70 @@ iframe:
 浏览新闻标题:
   ['xpath',"//[@align='center']/div[@id='Title']"]
  
+#---------------车辆管理---------------
+车辆类型名:
+  ['id','Name']
+新增车辆类型:
+  ['xpath',"//td[@field='NAME']/div[contains(text(),'商务车')]"]
+编辑后的车辆类型:
+  ['xpath',"//td[@field='NAME']/div[contains(text(),'SUV')]"]
+车辆0901304A:
+  ['xpath',"//td[@field='CARNUM']/div[contains(text(),'鲁A-0901304A')]"]
 
+车牌号:
+  ['id','CarNum']
+厂牌型号:
+  ['id','CarModel']
+车辆类型:
+  ['id','CarType']
+车辆价格:
+  ['id','CarPrice']
+当前状态:
+  ['id','Status']
+  
+可用车辆tab:
+  ['xpath',"//a[@class='tabs-inner']/span[@class='tabs-title'][contains(text(),'可用车辆')]"]
+已损坏tab:
+  ['xpath',"//a[@class='tabs-inner']/span[@class='tabs-title'][contains(text(),'已损坏')]"]
+维修中tab:
+  ['xpath',"//a[@class='tabs-inner']/span[@class='tabs-title'][contains(text(),'维修中')]"]
+已报废tab:
+  ['xpath',"//a[@class='tabs-inner']/span[@class='tabs-title'][contains(text(),'已报废')]"]
+  
+维护日期:
+  ['xpath',".//*[@id='form']/table/tbody/tr[2]/td[2]/span/input[1]"]
+维护类型:
+  ['id','RepairType']
+维护费用:
+  ['id','RepairMoney']
+加油升数:
+  ['id','JiaYou']
+  
+开始时间:
+  ['xpath',".//*[@id='form']/table/tbody/tr[4]/td[1]/span/input[1]"]
+结束时间:
+  ['xpath',".//*[@id='form']/table/tbody/tr[4]/td[2]/span/input[1]"]
+目的地:
+  ['id','Destination']
+里程:
+  ['id','Miles']
+调度员框:
+  ['id','ManagerName']
+调度员:
+  ['xpath',"//td[@field='REALNAME']/div[contains(text(),'管理员')]"]
+
+审批:
+  ['xpath',"//div[contains(text(),'鲁A-0901304A')]/following::td[@field='DL1'][1]/div/a[contains(text(),'审批')]"]
+使用:
+  ['xpath',"//div[contains(text(),'鲁A-0901304A')]/following::td[@field='DL1'][1]/div/a[contains(text(),'使用')]"]
+结束:
+  ['xpath',"//div[contains(text(),'鲁A-0901304A')]/following::td[@field='DL1'][1]/div/a[contains(text(),'结束')]"]
+
+已通过tab:
+  ['xpath',"//a[@class='tabs-inner']/span[@class='tabs-title'][contains(text(),'已通过')]"]
+使用中tab:
+  ['xpath',"//a[@class='tabs-inner']/span[@class='tabs-title'][contains(text(),'已通过')]"]
+车辆审批已通过tab:
+  ['xpath',"//a[@class='tabs-inner']/span[@class='tabs-title'][contains(text(),'已通过')]"]
+操作确认:
+  ['xpath',"//div[@class='messager-button']/a/span/span"]

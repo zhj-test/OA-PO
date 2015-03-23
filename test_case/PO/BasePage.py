@@ -2,6 +2,7 @@
 import time
 import yaml
 import os
+from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.action_chains import ActionChains
 
@@ -88,19 +89,19 @@ class Action(object):
             isSucceed = True
         except BaseException, e:
             print e
-        self.operation_check(u'输入'+ key,isSucceed)
+        self.operation_check(u'输入 <'+ key+ u'> ',isSucceed)
         
     def click(self,key):
         
         isSucceed = False
-        send = self.find_element(key)
+        click = self.find_element(key)
         try:
-            send.click()
+            click.click()
             isSucceed = True
         except BaseException, e:
             print e
         
-        self.operation_check(u'点击'+ key,isSucceed)
+        self.operation_check(u'点击 <'+ key+ u'> ',isSucceed)
         
     def double_click(self,key):
         isSucceed = False
@@ -143,12 +144,12 @@ class Action(object):
     def select_main_menu(self,key1,key2,key3):
         if key1 == u'选择个人事务':
             #个人事务模块的选择
-            self.click(key2)
-            self.click(key3)
+            self.find_element(key2).click()
+            self.find_element(key3).click()
         else:
-            self.click(key1)
-            self.click(key2)
-            self.click(key3)
+            self.find_element(key1).click()
+            self.find_element(key2).click()
+            self.find_element(key3).click()
                
     def execute_script(self,key):
         #调用JavaScript
@@ -166,12 +167,25 @@ class Action(object):
         #检查页面上的元素是否存在
         data = self.get_value(key)
         try:
-            WebDriverWait(self.driver, 3).until(lambda driver: driver.find_element(data[0],data[1]))
+            WebDriverWait(self.driver, 3,0.5).until(lambda driver: driver.find_element(data[0],data[1]))
             return True
         except:
             return False
         finally:
             print u'<----------本条用例运行结束---------->'
             print ''
-
+    
+    def down_box(self,key,text):
+        u'''通过可见文本选择下拉框中的值'''
+        data = self.get_value(key)
+        isSucceed = False
+        try:
+            WebDriverWait(self.driver, 3,0.5).until(lambda driver: driver.find_element(data[0],data[1]))
+            select = Select(self.driver.find_element(data[0],data[1]))
+            #select.deselect_all()
+            select.select_by_visible_text(text)
+            isSucceed = True
+        except BaseException, e:
+            print e
+        self.operation_check(u'下拉框中选择: <'+ text+ '> ',isSucceed)   
         

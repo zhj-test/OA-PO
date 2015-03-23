@@ -34,6 +34,7 @@ class public_page(BasePage.Action):
         
     def edit(self):
         self.click(u'点击编辑')
+        #time.sleep(3)
         self.switch_frame("frame_0")
     
     def quert(self):
@@ -41,10 +42,18 @@ class public_page(BasePage.Action):
         
     def submit(self):    
         self.click(u'点击提交')
-        self.iframe('iframe')
+        #self.iframe('iframe')
+        print ''
+        time.sleep(2)
+        self.driver.refresh()
+        
     
     def close(self):
         self.click(u'点击关闭')
+        
+    def ok(self):
+        self.click(u'点击确定')
+        self.switch_frame('frame_0')
         
     def ueditor(self,text,ueditor='ueditor_0'):
         self.driver.switch_to_frame(ueditor) 
