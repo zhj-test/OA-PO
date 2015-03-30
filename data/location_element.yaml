@@ -43,6 +43,7 @@ url地址:
 #---------------首页定位信息---------------
 iframe:
   ['xpath',"//html/body/div[@class='panel layout-panel layout-panel-center']/div/div/div[@class='tabs-panels']/div[2]/div/div/iframe"] 
+
 选择个人事务:
   ['xpath',"//div[@class='panel-title panel-with-icon'][contains(text(),'个人事务')]"]
 选择公告栏:
@@ -71,6 +72,39 @@ iframe:
   ['id','ac54e4b53-dc1d-42c8-a57a-c3b14aa9bdb7']
 车辆使用管理:
   ['id','a46904ee4-0d42-4bb1-90a1-0b39fd5ae6ac']
+  
+固定资产:
+  ['xpath',"//span[@class='tree-title' and contains(text(),'固定资产')]"]
+固定资产管理:
+  ['id','a06e0ebd2-30f9-40c0-8a2d-ae71d005be9f']
+资产折旧管理:
+  ['id','acc3a3f60-e201-4f6e-9e91-9f8649a8e468']
+任务类别设置:
+  ['id','a45b238c5-ba5d-4619-99ef-380dee4f0359']
+固定资产类别:
+  ['id','a8602b8b3-3f20-40e8-8f39-f5449a9cb0cf']
+折旧资产类别:
+  ['id','aa9382612-c1a1-4fab-b967-783882e01d41']
+
+效能管理:
+  ['xpath',"//div[@class='panel-title panel-with-icon'][contains(text(),'效能管理')]"]
+工作分享1:
+  ['xpath',"//span[@class='tree-title' and contains(text(),'工作分享')]"]
+工作分享2:  
+  ['id','ae42d099c-1e98-4f9e-aabc-babd3fba31c1']
+分享区设置:
+  ['id','a3fd7b9fc-c51d-4484-a86f-9fa57eb020d5']
+关注人设置:
+  ['id','a3a8fe29f-69a5-4187-b3ab-fe7604b40924']
+分享维护: 
+  ['id','af8f4ef7e-a7d7-4b6f-b373-dcd83526ab69']
+  
+
+
+
+
+  
+
 
 #---------------公告栏---------------
 公告类别名:
@@ -177,3 +211,79 @@ iframe:
   ['xpath',"//a[@class='tabs-inner']/span[@class='tabs-title'][contains(text(),'已通过')]"]
 操作确认:
   ['xpath',"//div[@class='messager-button']/a/span/span"]
+  
+#---------------固定资产---------------
+资产类别名称:
+  ['id','Name']
+新增资产类别list:
+  ['xpath',"//td[@field='NAME']/div[contains(text(),'新增--军火类')]"]
+选择资产类别list:
+  ['xpath',"//td[@field='NAME']/div[contains(text(),'计算机周边')]"]
+
+折旧资产类别:
+  ['id','DepType']
+折旧率:
+  ['id','DepRate']
+折旧周期:
+  ['id','DepCycle']
+新增折旧资产类别list:
+  ['xpath',"//td[@field='DEPTYPE']/div[contains(text(),'新增--运输损坏')]"]
+选择折旧资产类别list:
+  ['xpath',"//td[@field='DEPTYPE']/div[contains(text(),'使用损耗')]"]
+
+任务类型名:
+  ['id','Name']
+新增任务类型list:
+  ['xpath',"//td[@field='NAME']/div[contains(text(),'新增--任务类型名')]"]
+任务类型list:
+  ['xpath',"//td[@field='NAME']/div[contains(text(),'主线任务')]"]
+
+
+资产编号:
+  ['id','Number']
+资产名称:
+  ['id','Name']
+规格型号:
+  ['id','AssetModel']
+资产类别:
+  ['id','AssetType']         
+折旧类别:
+  ['id','DepType']
+开始折旧日期:
+  ['xpath',".//*[@id='form']/table/tbody/tr[9]/td[2]/span/input[1]"]
+资产原值:
+  ['id','ActualMoney']
+资产最低值:
+  ['id','MinMoney']
+新增固定资产list:
+  ['xpath',"//td[@field='NUMBER']/div[contains(text(),'新增-JNDZ-304A')]"]
+固定资产list:
+  ['xpath',"//td[@field='NUMBER']/div[contains(text(),'U-304A')]"]
+  
+分享区名称:
+  ['id','AddShareArea']
+分享区-新增list:
+  ['xpath',"//td[@field='NAME']/div[contains(text(),'小笑话-新增')]"]
+分享区list:
+  ['xpath',"//td[@field='NAME']/div[contains(text(),'娱乐八卦')]"]
+选择分享人:
+  ['xpath','//tbody/tr/td/input']
+全选:
+  ['xpath',".//*[@id='bottom_button']/a[2]/span/span[1]']"]
+全不选:
+  ['xpath',".//*[@id='bottom_button']/a[3]/span/span[1]']"]
+
+我发布的tab:
+  ['xpath',"//a[@class='tabs-inner']/span[@class='tabs-title'][contains(text(),'我发布的')]"]
+分享主题:
+  ['id','ShareTheme']
+分享区选择框:
+  ['xpath',".//*[@id='form']/table/tbody/tr[3]/td[1]/span/input[1]"]
+分享区:
+  ['xpath',".//div[contains(text(),'娱乐八卦')]"]
+分享内容:
+  ['id','view']
+新增工作分享list:
+  ['xpath',"//td[@field='SHARETHEME']/div/div[contains(text(),'逗你玩--新增')]"]
+工作分享list:
+  ['xpath',"//td[@field='SHARETHEME']/div/div[contains(text(),'买赔了')]"]

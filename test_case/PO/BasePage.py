@@ -100,7 +100,7 @@ class Action(object):
             isSucceed = True
         except BaseException, e:
             print e
-        
+    
         self.operation_check(u'点击 <'+ key+ u'> ',isSucceed)
         
     def double_click(self,key):
