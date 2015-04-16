@@ -2,9 +2,12 @@
 import time
 import yaml
 import os
+#from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.action_chains import ActionChains
+#from selenium.webdriver.support import expected_conditions as EC
+#from selenium.webdriver.common.keys import Keys
 
 class Action(object):
     def __init__(self,driver):
@@ -30,7 +33,7 @@ class Action(object):
     def operation_check(self,Name,isSucceed):
         #判断运行是否成功
         if isSucceed:
-            print  Name + u"操作：运行成功！"
+            print  Name + u"：运行成功！"
         else:
             day_now = time.strftime("%Y%m%d",time.localtime(time.time()))
             time_now = time.strftime("%H%M%S",time.localtime(time.time()))
@@ -41,13 +44,12 @@ class Action(object):
             captureName = "E:\\script\\myselenium\\OA-PO\\screenshot\\" + day_now+  "\\"+ Name+ "_"+ time_now+ '.png'
             #调用capture_screenshot()保存运行失败时的屏幕截图
             self.capture_screenshot(captureName)
-            print  Name + u"操作：运行失败！请查看截图快照："+ captureName
-            
+            print  Name + u"：运行失败！请查看截图快照："+ captureName
             self.driver.quit()
             
     def open(self,key):
         data = self.get_value(key)
-        self.driver.get(data)
+        self.driver.get(data[0])
         self.driver.maximize_window()
         time.sleep(2)
 
@@ -55,12 +57,16 @@ class Action(object):
         #定位一个元素：与工具原生API作用完全一致，只是增加了操作结果检查和日志记录。
         data = self.get_value(key)
         try:
-            WebDriverWait(self.driver, 10).until(lambda driver: driver.find_element(data[0],data[1]).is_displayed())
-            return self.driver.find_element(data[0],data[1])
+            #WebDriverWait(self.driver, 10).until(lambda driver: driver.find_element(data[0],data[1]).is_displayed())
+            #return self.driver.find_element(data[0],data[1])
+            element=WebDriverWait(self.driver, 10).until(lambda driver :driver.find_element(data[0],data[1]))
+            time.sleep(0.5)
+            return element
         #logging.debug(time.ctime()+ "find element [" + str(by) + "] success")
         except BaseException, e:
-            self.operation_check(key,False)
+            self.operation_check(key+ u'元素未发现',False)
             print e
+        
         
         
     def find_elements(self,key):
@@ -76,12 +82,13 @@ class Action(object):
             print e
         self.operation_check("find_elements",isSucceed)
     
-    def send_keys(self,key,text,clear=True, click=True):
+    def send_keys(self,key,text,clear=True,click=True):#
         #内容重新输入:清理指定对象中已经输入的内容重新输入，操作之前自动等待到对象可见。
         isSucceed = False
         send = self.find_element(key)
         if click:
             send.click()
+        
         if clear:
             send.clear()
         try:
@@ -89,7 +96,7 @@ class Action(object):
             isSucceed = True
         except BaseException, e:
             print e
-        self.operation_check(u'输入 <'+ key+ u'> ',isSucceed)
+        self.operation_check(u'输入 <'+ key+ u'> 操作',isSucceed)
         
     def click(self,key):
         
@@ -101,26 +108,35 @@ class Action(object):
         except BaseException, e:
             print e
     
-        self.operation_check(u'点击 <'+ key+ u'> ',isSucceed)
+        self.operation_check(u'点击 <'+ key+ u'> 操作',isSucceed)
         
     def double_click(self,key):
         isSucceed = False
+        #定位到要悬停的元素
+        click = self.find_element(key)
         try:
-            #定位到要悬停的元素
-            click = self.find_element(key)
             ActionChains(self.driver).double_click(click).perform()
             isSucceed = True
         except BaseException, e:
             print e
         
-        self.operation_check(u"双击"+ key,isSucceed)
+        self.operation_check(u"双击 <"+ key+ u'> 操作',isSucceed)
+        
+    def switch_to_frame(self,frame):
+        #重写switch_frame方法
+        time.sleep(1)
+        try:
+            self.driver.switch_to_frame(frame)
+            time.sleep(0.5)
+        except BaseException, e:
+            print e
 
     def switch_frame(self, frame):
-        #重写switch_frame方法
+        #重写switch_frame方法,先退出所有frame，再次进入新的frame
         #isSucceed = False
         try:
             self.driver.switch_to_default_content()     #退出frame，切换到新的frame
-            self.driver.switch_to_frame(frame)
+            self.switch_to_frame(frame)
             #isSucceed = True
         except BaseException, e:
             print e
@@ -128,9 +144,9 @@ class Action(object):
         
     def iframe(self,key):
         #isSucceed = False
+        self.driver.switch_to_default_content()
+        frame = self.find_element(key)
         try:
-            self.driver.switch_to_default_content()
-            frame = self.find_element(key)
             self.driver.switch_to_frame(frame)
             #isSucceed = True
         except BaseException, e:
@@ -138,8 +154,7 @@ class Action(object):
         #self.operation_check(u'切换到主页面'+ key,isSucceed)
         
     def text(self,key):
-        data = self.get_value(key)
-        return self.driver.find_element(data[0],data[1]).text
+        return self.find_element(key).text
         
     def select_main_menu(self,key1,key2,key3):
         if key1 == u'选择个人事务':
@@ -162,18 +177,6 @@ class Action(object):
             print e
         
         self.operation_check(key,isSucceed)
-        
-    def is_element_present(self,key):
-        #检查页面上的元素是否存在
-        data = self.get_value(key)
-        try:
-            WebDriverWait(self.driver, 3,0.5).until(lambda driver: driver.find_element(data[0],data[1]))
-            return True
-        except:
-            return False
-        finally:
-            print u'<----------本条用例运行结束---------->'
-            print ''
     
     def down_box(self,key,text):
         u'''通过可见文本选择下拉框中的值'''
@@ -182,10 +185,47 @@ class Action(object):
         try:
             WebDriverWait(self.driver, 3,0.5).until(lambda driver: driver.find_element(data[0],data[1]))
             select = Select(self.driver.find_element(data[0],data[1]))
-            #select.deselect_all()
             select.select_by_visible_text(text)
             isSucceed = True
         except BaseException, e:
             print e
-        self.operation_check(u'下拉框中选择: <'+ text+ '> ',isSucceed)   
+        self.operation_check(u'下拉框中选择: <'+ text+ u'> 操作',isSucceed)
+        
+            
+    def element_present(self,key):
+        #检查页面上的元素是否新增或编辑成功
+        data = self.get_value(key)
+        isSucceed = False
+        try:
+            element=WebDriverWait(self.driver, 3).until(lambda driver :driver.find_element(data[0],data[1]))
+            element.click()
+            #WebDriverWait(self.driver,5,0.5).until(lambda driver: driver.find_element(data[0],data[1]).is_displayed())
+            isSucceed = True
+            self.operation_check(u'列表中存在<'+ key+ u'>数据',isSucceed) 
+        except BaseException, e:
+            self.operation_check(u'列表中不存在<'+ key+ u'>数据',isSucceed)
+            print e
+        finally:  
+            print u'<---------------本条用例运行结束--------------->'
+            print ''
+            self.driver.refresh()
+            
+        
+    def element_no_present(self,key):
+        #检查页面上的元素删除后是否还存在
+        data = self.get_value(key)
+        isSucceed = False
+        try:
+            #WebDriverWait(self.driver,3).until(lambda driver: driver.find_element(data[0],data[1]).is_displayed())
+            element=WebDriverWait(self.driver, 3).until(lambda driver :driver.find_element(data[0],data[1]))
+            element.click()
+            self.operation_check(u'执行删除后，列表中仍存在<'+ key+ u'>数据',isSucceed)
+        except:
+            isSucceed = True
+            self.operation_check(u'执行删除后，列表中已不存在<'+ key+ u'>数据',isSucceed)
+            self.driver.refresh()
+        finally:  
+            print u'<---------------本条用例运行结束--------------->'
+            print ''
+
         

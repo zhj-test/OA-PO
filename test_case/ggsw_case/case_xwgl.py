@@ -72,7 +72,7 @@ class xwgl(unittest.TestCase):
         self.xwgl.main_menu_xwll()
         self.xwgl.double_list()
         #print self.xwgl.title_text()
-        #assert self.xwgl.title_text() == "第一条新闻"
+        assert self.xwgl.title_text(), "第一条新闻"
         self.driver.refresh()
         
     def xwgl_qxfb(self):

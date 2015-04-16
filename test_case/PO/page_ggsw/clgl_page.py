@@ -31,15 +31,30 @@ class clgl_page(BasePage.Action):
     def car_type_name(self,text):
         self.send_keys(u'车辆类型名', text)
         
-    def select_add_list(self):
-        self.click(u'新增车辆类型')
+    def select_add_CarType(self):
+        self.click(u'新增车辆类型list')
+        
+    def check_add_CarType(self):
+        self.element_present(u'新增车辆类型list')
     
-    def select_edit_list(self):
-        self.click(u'编辑后的车辆类型')
+    def select_CarType(self):
+        self.click(u'编辑后的车辆类型list')
+        
+    def check_CarType(self):
+        self.element_present(u'编辑后的车辆类型list')
+        
+    def check_CarType_no(self):
+        self.element_no_present(u'编辑后的车辆类型list')
         
     '''车辆信息管理'''
     def select_car(self):
-        self.click(u'车辆0901304A')
+        self.click(u'车辆0901304Alist')
+
+    def check_car(self):
+        self.element_present(u'车辆0901304Alist')
+        
+    def check_car_no(self):
+        self.element_no_present(u'车辆0901304Alist')
 
     def send_CarNum(self,text):
         self.send_keys(u'车牌号', text)
@@ -101,6 +116,7 @@ class clgl_page(BasePage.Action):
         
     def ManagerName(self):
         self.double_click(u'调度员框')
+        self.switch_frame('frame_2')
         
     def select_Manager(self):
         self.click(u'调度员')

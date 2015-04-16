@@ -1,7 +1,6 @@
 #---------------登录界面定位信息---------------
 url地址:
-  #['http://www.baidu.com']
-  ['http://192.168.1.102:8086/']
+  ["http://192.168.1.102:8086/"]
 输入登陆用户名:
   ['id','TxtName']
 输入登录密码:
@@ -14,19 +13,27 @@ url地址:
 
 #---------------公共选项---------------
 点击新增:
-  ['xpath',"//a[@id='add']/span/span[1]"]
+  #['xpath',"//a[@id='add']/span/span[1]"]
+  ['css selector',"span.l-btn-icon.icon-add"]
 点击删除:
-  ['xpath',"//a[@id='del']/span/span"]
+  ['css selector',"span.l-btn-icon.icon-remove"]
+  #['xpath',"//a[@id='del']/span/span"]
 确定删除:
   ['xpath',"//div[@class='messager-button']/a[1]/span/span"]
 点击编辑:
-  ['xpath',"//a[@id='edit']/span/span"]
+  ['css selector',"span.l-btn-icon.icon-edit"]
+  #['xpath',"//a[@id='edit']/span/span"]
 点击查询:
   ['xpath',"//a[@id='search_btn']/span/span"]
 点击提交:
-  ['xpath',"//a[@id='submit']/span/span"]
+  ['css selector','span.l-btn-icon.icon-ok']
+  #['xpath',"//a[@id='submit']/span/span"]
+  #8086
+  #['xpath',"//a[@id='save']/span/span"]		
+  #8168
 点击关闭:
-  ['xpath',"//a[@id='close']/span/span[@class='l-btn-icon icon-ok']"]
+  #['xpath',"//a[@id='close']/span/span[@class='l-btn-icon icon-ok']"]
+  ['css selector',"span.l-btn-icon.icon-cancel"]
 点击确定:
   ['css selector',"span.l-btn-icon.icon-ok"]
 富文本框:
@@ -38,11 +45,15 @@ url地址:
   ['xpath',"//span[@class='tree-title'][contains(text(),'信息中心')]"]
 选择人员:
   ['xpath',"//div[@class='datagrid-cell datagrid-cell-c3-RealName'][contains(text(),'管理员')]"]
+选择人员all:
+  ['xpath',"//div[@class='datagrid-cell datagrid-cell-c3-RealName']"]
 
 
 #---------------首页定位信息---------------
 iframe:
-  ['xpath',"//html/body/div[@class='panel layout-panel layout-panel-center']/div/div/div[@class='tabs-panels']/div[2]/div/div/iframe"] 
+  ['xpath',"//html/body/div[@class='panel layout-panel layout-panel-center']/div/div/div[@class='tabs-panels']/div[2]/div/div/iframe"]
+iframe2:
+  ['xpath',"//html/body/div[@class='panel layout-panel layout-panel-center']/div/div/div[@class='tabs-panels']/div[3]/div/div/iframe"]
 
 选择个人事务:
   ['xpath',"//div[@class='panel-title panel-with-icon'][contains(text(),'个人事务')]"]
@@ -85,6 +96,17 @@ iframe:
   ['id','a8602b8b3-3f20-40e8-8f39-f5449a9cb0cf']
 折旧资产类别:
   ['id','aa9382612-c1a1-4fab-b967-783882e01d41']
+  
+发文:
+  ['xpath',"//span[@class='tree-title' and contains(text(),'发文')]"]
+发文类别维护:
+  ['id','ae7d33459-7d75-44d7-b3c1-5c0728181400']
+发文管理:
+  ['id','a671593ad-3765-4da5-ab44-7776bcd14da6']
+发文浏览:
+  ['id','aaa93abc6-8af4-491c-b92a-73c84671c7d7']
+核稿:
+  ['id','aabba7f8c-9eaa-4c29-930d-9bd7a03580c4']
 
 效能管理:
   ['xpath',"//div[@class='panel-title panel-with-icon'][contains(text(),'效能管理')]"]
@@ -99,6 +121,52 @@ iframe:
 分享维护: 
   ['id','af8f4ef7e-a7d7-4b6f-b373-dcd83526ab69']
   
+品牌分:
+  ['xpath',"//span[@class='tree-title' and contains(text(),'品牌分')]"]
+品牌分申请:
+  ['id','ad474ec0a-c50a-4165-87a4-3aae353d47e4']
+品牌分查看:
+  ['id','a56f27bb0-a8a3-4c81-9063-3561fe9cbe31']
+品牌分审核:
+  ['id','a14dcd154-1be1-4397-bff6-d7da82568daa']
+品牌分排行榜:
+  ['id','a82f32196-b50c-4aa5-bd0c-7cfa66280e75']
+  
+YCYA指令:
+  ['xpath',"//span[@class='tree-title' and contains(text(),'YCYA指令')]"]
+下达的指令:
+  ['id','afa40d929-9c21-4287-9ef4-1389dc1f5ecc']
+检查的指令:
+  ['id','a613de5c8-88d9-47b8-b3a8-7503e0d92b04']
+执行的指令:
+  ['id','a65c69a3a-073d-45c8-a29b-abe5fc9e50a9']
+YCYA指令设置:
+  ['id','a735403aa-b8e2-4416-876e-23745ff3e215']
+  
+人力资源:
+  ['xpath',"//div[@class='panel-title panel-with-icon'][contains(text(),'人力资源')]"]
+人事档案:
+  ['xpath',"//span[@class='tree-title' and contains(text(),'人事档案')]"]
+档案管理:
+  ['id','a334a251d-51a7-494d-a196-d70c24300826']
+人事合同:
+  ['id','afa4d5882-33f4-486e-8379-073ec345582e']
+  
+培训记录1:
+  ['xpath',"//span[@class='tree-title' and contains(text(),'培训记录')]"]
+培训记录2:
+  ['id','a76c7a5a4-02ac-4fdf-8d39-49c6058deb54']
+
+信息交流:
+  ['xpath',"//div[@class='panel-title panel-with-icon'][contains(text(),'信息交流')]"]
+知识共享:
+  ['xpath',"//span[@class='tree-title' and contains(text(),'知识共享')]"]
+知识共享平台管理:
+  ['id','a77de3ff8-dc8f-482b-96a7-5f9480f081d5']
+知识共享平台浏览:
+  ['id','a5ff783b5-4429-4d87-92dd-647e768fe5a1']
+
+
 
 
 
@@ -147,11 +215,11 @@ iframe:
 #---------------车辆管理---------------
 车辆类型名:
   ['id','Name']
-新增车辆类型:
+新增车辆类型list:
   ['xpath',"//td[@field='NAME']/div[contains(text(),'商务车')]"]
-编辑后的车辆类型:
+编辑后的车辆类型list:
   ['xpath',"//td[@field='NAME']/div[contains(text(),'SUV')]"]
-车辆0901304A:
+车辆0901304Alist:
   ['xpath',"//td[@field='CARNUM']/div[contains(text(),'鲁A-0901304A')]"]
 
 车牌号:
@@ -260,6 +328,29 @@ iframe:
 固定资产list:
   ['xpath',"//td[@field='NUMBER']/div[contains(text(),'U-304A')]"]
   
+#发文
+发文类别名:
+  ['id','Name']
+排序号:
+  ['id','PxNum']
+新增-发文类别list:
+  ['xpath',"//div/sapn[@class='tree-title'][contains(text(),'内部通告-新增')]"]
+发文类别list:
+  ['xpath',"//div/sapn[@class='tree-title'][contains(text(),'事务性通知')]"]
+文件名称:
+  ['id','Name']
+文件号:
+  ['id','CODE']
+发布范围:
+  ['id','ReadRealName']
+核稿人:
+  ['id','hegaoReadRealName']
+新增-文件名称list:
+  ['xpath',"//td[@field='NAME']/div[contains(text(),'2014公司一号文-新增')]"]
+文件名称list:
+  ['xpath',"//td[@field='NAME']/div[contains(text(),'2015红头文件001')]"]
+
+#工作分享
 分享区名称:
   ['id','AddShareArea']
 分享区-新增list:
@@ -287,3 +378,116 @@ iframe:
   ['xpath',"//td[@field='SHARETHEME']/div/div[contains(text(),'逗你玩--新增')]"]
 工作分享list:
   ['xpath',"//td[@field='SHARETHEME']/div/div[contains(text(),'买赔了')]"]
+  
+#品牌分
+奖惩人员:
+  ['id','employee']
+奖惩分值:
+  ['id','brandscrocevalue']
+奖惩原因:
+  ['id','brandscore-reason']
+品牌分申请-新增list:
+  ['xpath',"//td[@field='CHANGEREASON']/div/div[contains(text(),'扶老太太过马路')]"]
+品牌分申请list:
+  ['xpath',"//td[@field='CHANGEREASON']/div/div[contains(text(),'提前完成工作')]"]
+待审核品牌分list:
+  ['xpath',"//div[contains(text(),'管理员')]/following::td[@field='Cz'][1]/div/a[contains(text(),'审核')]"]
+品牌分查看list:
+  ['xpath',"//div[contains(text(),'提前完成工作')]/following::td[@field='AUDITRESULT'][1]/div/a"] 
+  
+#YCYA指令
+完成时间:
+  ['class name','combo-text validatebox-text']
+执行人:
+  ['id','receiver']
+检查人:
+  ['id','checker']
+YCYA内容:
+  ['id','inscontent']
+下达命令新增列表list:
+  ['xpath',"//td[@field='CONTENT']/div/div[contains(text(),'中午吃五个馒头')]"]
+下达命令列表list:
+  ['xpath',"//td[@field='CONTENT']/div/div[contains(text(),'明天提交测试总结报告')]"]
+  
+#人力资源--人事档案--档案管理
+真实姓名:
+  ['id','RealName']
+工号:
+  ['id','WorkNum']
+部门名称:
+  ['id','Unit']
+角色名称:
+  ['id','Respon']
+职位:
+  ['id','Post']
+职位选择:
+  ['xpath',"//td[@field='ITEMNAME']/div[contains(text(),'副主管')]"]
+在岗状态:
+  ['id','StardType']
+档案新增list:
+  ['xpath',"//td[@field='WORKNUM']/div[contains(text(),'fzg-xz-00001')]"]
+档案list:
+  ['xpath',"//td[@field='WORKNUM']/div[contains(text(),'fzg-00001')]"]
+
+新建合同信息:
+  ['xpath',"//a/span[contains(text(),'新建合同信息')]"]
+签约人员:
+  ['id','NAME']
+合同编号:
+  ['id','NUMBER']
+满约日期:
+  ['xpath',".//*[@id='form']/table/tbody/tr[6]/td[2]/span/input[1]"]
+合同新增list:
+  ['xpath',"//td[@field='Number']/div[contains(text(),'htbh-0001')]"]
+合同list:
+  ['xpath',"//td[@field='Number']/div[contains(text(),'htbh-0002')]"]
+合同编辑:
+  ['xpath',"//div[contains(text(),'htbh-0001')]/following::td[@field='EDIT'][1]/div/a[contains(text(),'编辑')]"]
+合同删除:
+  ['xpath',"//div[contains(text(),'htbh-0002')]/following::td[@field='EDIT'][1]/div/a[contains(text(),'删除')]"]
+
+#培训记录
+培训项目:
+  ['id','StaffName']
+培训单位:
+  ['id','Company']
+参与用户:
+  ['id','SendRealName']
+培训开始时间:
+  ['xpath',"//input[@id='StartTime']/following::span[1]/input[1]"]
+培训结束时间:
+  ['xpath',"//input[@id='EndTime']/following::span[1]/input[1]"]
+培训记录新增list:
+  ['xpath',"//td[@field='STAFFNAME']/div[contains(text(),'软件测试基础')]"]
+培训记录list:
+  ['xpath',"//td[@field='STAFFNAME']/div[contains(text(),'软件自动化测试培训')]"]
+
+新增文件夹:
+  ['xpath',"//a[@id='add']/span/span[1]"]
+编辑文件夹:
+  ['xpath',"//a[@id='edit']/span/span[2]"]
+删除文件夹:
+  ['xpath',"//a[@id='del']/span/span[2]"]
+文件夹名称:
+  ['id','Name']
+文件夹排序号:
+  ['id','PxNum']
+共享部门:
+  ['id','GxUnitName']
+文件列表新增list:
+  ['xpath',"//div/span[contains(text(),'软件测试')]"]
+文件列表list:
+  ['xpath',"//div/span[contains(text(),'自动化测试')]"]
+文件名称:
+  ['id','PageName']
+文件排序号:
+  ['id','PxNum']
+添加文件附件:
+  ['id','SWFUpload_0']
+文件新增list:
+  ['xpath',"//td[@field='OLDNAME']/div[contains(text(),'QTP')]"]
+文件list:
+  ['xpath',"//td[@field='OLDNAME']/div[contains(text(),'selenium')]"]
+
+    
+
