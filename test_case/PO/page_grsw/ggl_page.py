@@ -2,6 +2,7 @@
 from test_case.PO import BasePage
 
 class ggl_page(BasePage.Action):
+    
     def main_menu(self):
         self.select_main_menu(u'选择个人事务',u'选择公告栏', u'选择公告浏览')
         self.iframe('iframe')
@@ -28,6 +29,9 @@ class ggl_page(BasePage.Action):
         self.click(u'选择人员')
         self.click(u'点击确定')
         self.switch_frame('frame_0')
+        
+    def check_list(self):
+        self.element_present(u'选择新增的公告类别')
         
     def category_add_list(self):
         return self.is_element_present(u'选择新增的公告类别')

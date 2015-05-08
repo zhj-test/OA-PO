@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-import unittest,time,os
+import unittest,time
 from selenium import webdriver
 from test_case.PO.page_xxjl import zsgx_page
 from test_case.PO import public_page
@@ -33,12 +33,12 @@ class case_pxjl(unittest.TestCase):
         self.public.login('ycadmin','111111')
         
     def test_zsgx(self):
-        #self.wjj_xz()
-        #self.wjj_bj()
-        #self.wj_xz()
-        #self.wj_bj()
-        #self.wj_ll()
-        #self.wj_sc()
+        self.wjj_xz()
+        self.wjj_bj()
+        self.wj_xz()
+        self.wj_bj()
+        self.wj_ll()
+        self.wj_sc()
         self.wjj_sc()
         self.public.quit()
     

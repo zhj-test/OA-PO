@@ -3,9 +3,12 @@ import time,os
 import yaml
 from test_case.PO import BasePage
 class public_page(BasePage.Action):
+ 
     def input_data(self,key):
         #通过yaml文件获取数据
-        f = open('E:\\script\\myselenium\\OA-PO\\data\\input_data.yaml')
+        file_path = os.path.join(self.B_DIR,"data","location_element.yaml")
+        f = open(file_path)
+        #f = open('E:\\script\\myselenium\\OA-PO\\data\\input_data.yaml')
         value = yaml.load(f)
         f.close()
         try:
@@ -15,6 +18,7 @@ class public_page(BasePage.Action):
             print u'location_element文件中找不到%s' %key
     
     def login(self,name,password):
+        #登录操作
         self.open(u'url地址')
         print ''
         self.send_keys(u'输入登陆用户名',name)
@@ -52,6 +56,7 @@ class public_page(BasePage.Action):
         self.click(u'点击确定')
         self.switch_frame('frame_0')
         
+        
     def ueditor(self,text,ueditor='ueditor_0'):
         self.driver.switch_to_frame(ueditor) 
         self.send_keys(u'富文本框',text)
@@ -66,7 +71,8 @@ class public_page(BasePage.Action):
         4、调用的upfile.exe与生成upfile.exe的脚本upfile.au3存放在..\data\Upload文件夹中
         '''
         BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
-        file_path = os.path.join(BASE_DIR,"data\\Upload\\upfile.exe")
+        file_path = os.path.join(BASE_DIR,"data","Upload","upfile.exe")
+        #Python 的os模块的system()方法可以调用exe程序并执行
         os.system(file_path)
         time.sleep(10)
         

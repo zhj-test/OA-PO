@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-import unittest
+import unittest,time
 from selenium import webdriver
 from test_case.PO.page_ggsw import clgl_page
 from test_case.PO import public_page
@@ -153,7 +153,7 @@ class case_clgl(unittest.TestCase):
         self.clgl.ManagerName()
         self.clgl.select_Manager()
         self.public.ok()
-        self.public.submit()
+        self.public.submit() 
         self.clgl.check_car()
         
     def clsygl_sp(self):

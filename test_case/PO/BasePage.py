@@ -2,19 +2,20 @@
 import time
 import yaml
 import os
-#from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.action_chains import ActionChains
-#from selenium.webdriver.support import expected_conditions as EC
-#from selenium.webdriver.common.keys import Keys
 
 class Action(object):
+    
     def __init__(self,driver):
         self.driver = driver
+        self.B_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+        
     def get_value(self,key):
         #通过yaml文件获取定位信息
-        f = open('E:\\script\\myselenium\\OA-PO\\data\\location_element.yaml')
+        file_path = os.path.join(self.B_DIR,"data","location_element.yaml")
+        f = open(file_path)
         value = yaml.load(f)
         f.close()
         try:
@@ -31,23 +32,30 @@ class Action(object):
             print "保存屏幕截图失败，失败信息:"+ e
 
     def operation_check(self,Name,isSucceed):
+        '''
+                        判断运行是否成功：
+            1、若成功，输出运行成功；
+            2、若不成功，则对失败页面进行屏幕截图，并保存:
+               (1)保存路径为'screenshot'--day_now--Name_time_now.png;
+               (2)保存前先判断'screenshot'文件夹下是否存在day_now文件夹，若不存在，则先新建'day_now'文件夹
+               (3)保存的文件名为    “所检查的操作名Name”_“所检查的时间time_now”.png
+        '''
         #判断运行是否成功
         if isSucceed:
             print  Name + u"：运行成功！"
         else:
             day_now = time.strftime("%Y%m%d",time.localtime(time.time()))
             time_now = time.strftime("%H%M%S",time.localtime(time.time()))
-            if os.path.exists("E:\\script\\myselenium\\OA-PO\\screenshot\\" + day_now):
-                pass
-            else:
-                os.mkdir("E:\\script\\myselenium\\OA-PO\\screenshot\\" + day_now)
-            captureName = "E:\\script\\myselenium\\OA-PO\\screenshot\\" + day_now+  "\\"+ Name+ "_"+ time_now+ '.png'
-            #调用capture_screenshot()保存运行失败时的屏幕截图
-            self.capture_screenshot(captureName)
-            print  Name + u"：运行失败！请查看截图快照："+ captureName
+            path = os.path.join(self.B_DIR,'screenshot',day_now)
+            if not os.path.exists(path):
+                os.mkdir(path)
+            png_path = os.path.join(path,Name+ "_"+ time_now+ '.png')
+            self.capture_screenshot(png_path)
+            print  Name + u"：运行失败！请查看截图快照："+ png_path
             self.driver.quit()
             
     def open(self,key):
+        #打开浏览器--输入网址--将浏览器最大化
         data = self.get_value(key)
         self.driver.get(data[0])
         self.driver.maximize_window()
@@ -57,18 +65,12 @@ class Action(object):
         #定位一个元素：与工具原生API作用完全一致，只是增加了操作结果检查和日志记录。
         data = self.get_value(key)
         try:
-            #WebDriverWait(self.driver, 10).until(lambda driver: driver.find_element(data[0],data[1]).is_displayed())
-            #return self.driver.find_element(data[0],data[1])
             element=WebDriverWait(self.driver, 10).until(lambda driver :driver.find_element(data[0],data[1]))
-            time.sleep(0.5)
             return element
-        #logging.debug(time.ctime()+ "find element [" + str(by) + "] success")
         except BaseException, e:
             self.operation_check(key+ u'元素未发现',False)
             print e
-        
-        
-        
+     
     def find_elements(self,key):
         #定位一组元素：与工具原生API作用完全一致，只是增加了操作结果检查和日志记录。
         data = self.get_value(key)
@@ -77,18 +79,20 @@ class Action(object):
             if len(self.driver.find_elements(data[0],data[1])):
                 return self.driver.find_elements(data[0],data[1])
                 isSucceed = True
-        #logging.debug(time.ctime()+ "find element [" + str(by) + "] success")
         except BaseException, e:
             print e
-        self.operation_check("find_elements",isSucceed)
+        self.operation_check(key+ u'元素未发现',isSucceed)
     
-    def send_keys(self,key,text,clear=True,click=True):#
-        #内容重新输入:清理指定对象中已经输入的内容重新输入，操作之前自动等待到对象可见。
+    def send_keys(self,key,text,clear=True,click=True):
+        '''
+                    在输入框内输入内容：
+            1、clear=True：清除输入框的内容
+            2、click=True：对文本框进行一个单机操作，再进行输入
+        '''
         isSucceed = False
         send = self.find_element(key)
         if click:
             send.click()
-        
         if clear:
             send.clear()
         try:
@@ -99,11 +103,11 @@ class Action(object):
         self.operation_check(u'输入 <'+ key+ u'> 操作',isSucceed)
         
     def click(self,key):
-        
+        #鼠标左键单击操作，
         isSucceed = False
-        click = self.find_element(key)
+        aaa = self.find_element(key)
         try:
-            click.click()
+            aaa.click()
             isSucceed = True
         except BaseException, e:
             print e
@@ -111,6 +115,7 @@ class Action(object):
         self.operation_check(u'点击 <'+ key+ u'> 操作',isSucceed)
         
     def double_click(self,key):
+        #鼠标左键双击操作
         isSucceed = False
         #定位到要悬停的元素
         click = self.find_element(key)
@@ -132,7 +137,7 @@ class Action(object):
             print e
 
     def switch_frame(self, frame):
-        #重写switch_frame方法,先退出所有frame，再次进入新的frame
+        #先退出所有frame，再次进入新的frame
         #isSucceed = False
         try:
             self.driver.switch_to_default_content()     #退出frame，切换到新的frame
@@ -143,6 +148,7 @@ class Action(object):
         #self.operation_check(u'切换到'+ frame,isSucceed)
         
     def iframe(self,key):
+        #进入frame：针对frame没有id、neme属性的
         #isSucceed = False
         self.driver.switch_to_default_content()
         frame = self.find_element(key)
@@ -154,6 +160,7 @@ class Action(object):
         #self.operation_check(u'切换到主页面'+ key,isSucceed)
         
     def text(self,key):
+        #获取文本值
         return self.find_element(key).text
         
     def select_main_menu(self,key1,key2,key3):
@@ -199,7 +206,6 @@ class Action(object):
         try:
             element=WebDriverWait(self.driver, 3).until(lambda driver :driver.find_element(data[0],data[1]))
             element.click()
-            #WebDriverWait(self.driver,5,0.5).until(lambda driver: driver.find_element(data[0],data[1]).is_displayed())
             isSucceed = True
             self.operation_check(u'列表中存在<'+ key+ u'>数据',isSucceed) 
         except BaseException, e:
@@ -216,8 +222,7 @@ class Action(object):
         data = self.get_value(key)
         isSucceed = False
         try:
-            #WebDriverWait(self.driver,3).until(lambda driver: driver.find_element(data[0],data[1]).is_displayed())
-            element=WebDriverWait(self.driver, 3).until(lambda driver :driver.find_element(data[0],data[1]))
+            element=WebDriverWait(self.driver, 2).until(lambda driver :driver.find_element(data[0],data[1]))
             element.click()
             self.operation_check(u'执行删除后，列表中仍存在<'+ key+ u'>数据',isSucceed)
         except:

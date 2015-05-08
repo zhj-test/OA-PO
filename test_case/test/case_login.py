@@ -15,11 +15,11 @@ class login(unittest.TestCase):
         
     def test_login(self):
         self.loginpage.open_url()
-        data = input_data.input_data(u'参数化用户')
+        data = public_page.input_data(u'参数化用户')
         for account in data:
             print '-------------用例开始--------------' 
             print self.driver.title
-            self.loginpage.TxtName(account[0])
+            self.loginpage.TxtName('ycadmin')#account[0]
             self.loginpage.TxtPwd(account[1])
             self.loginpage.login_button()
             

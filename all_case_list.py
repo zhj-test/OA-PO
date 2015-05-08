@@ -6,7 +6,5 @@ from test_case.ggsw_case import *
 from test_case.grsw_case import *
 #用例文件列表
 def caselist():
-    alltestnames = [case_clgl.case_clgl,\
-                    #case_xwgl.xwgl,\
-                    ]
+    alltestnames = [case_clgl.case_clgl,case_xwgl.xwgl]
     return alltestnames

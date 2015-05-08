@@ -5,6 +5,9 @@ class login_page(BasePage.Action):
     def open_url(self):
         self.open(u'url地址')
         
+    def name(self,text):
+        self.send_keys('输入登陆用户名', text)
+        
     def TxtName(self,name):
         self.send_keys(u'输入登陆用户名',name)
         

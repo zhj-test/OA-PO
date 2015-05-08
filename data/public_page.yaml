@@ -1,0 +1,48 @@
+url地址:
+  ["http://192.168.1.102:8086/"]
+输入登陆用户名:
+  ['id','TxtName']
+输入登录密码:
+  ['id','TxtPwd']
+点击登录:
+  ['id','login_button']
+错误信息提示:
+  ['xpath',"//div[@class='error mtip']/span"]
+  
+
+#---------------公共选项---------------
+点击新增:
+  #['xpath',"//a[@id='add']/span/span[1]"]
+  ['css selector',"span.l-btn-icon.icon-add"]
+点击删除:
+  ['css selector',"span.l-btn-icon.icon-remove"]
+  #['xpath',"//a[@id='del']/span/span"]
+确定删除:
+  ['xpath',"//div[@class='messager-button']/a[1]/span/span"]
+点击编辑:
+  ['css selector',"span.l-btn-icon.icon-edit"]
+  #['xpath',"//a[@id='edit']/span/span"]
+点击查询:
+  ['xpath',"//a[@id='search_btn']/span/span"]
+点击提交:
+  ['css selector','span.l-btn-icon.icon-ok']
+  #['xpath',"//a[@id='submit']/span/span"]
+  #8086
+  #['xpath',"//a[@id='save']/span/span"]		
+  #8168
+点击关闭:
+  #['xpath',"//a[@id='close']/span/span[@class='l-btn-icon icon-ok']"]
+  ['css selector',"span.l-btn-icon.icon-cancel"]
+点击确定:
+  ['css selector',"span.l-btn-icon.icon-ok"]
+富文本框:
+  ['xpath',"//html/body[@class='view']"]
+  
+选择公司:
+  ['xpath',"//span[@class='tree-title'][contains(text(),'集团内部')]"]
+选择部门:
+  ['xpath',"//span[@class='tree-title'][contains(text(),'信息中心')]"]
+选择人员:
+  ['xpath',"//div[@class='datagrid-cell datagrid-cell-c3-RealName'][contains(text(),'管理员')]"]
+选择人员all:
+  ['xpath',"//div[@class='datagrid-cell datagrid-cell-c3-RealName']"]

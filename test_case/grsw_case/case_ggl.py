@@ -17,25 +17,35 @@ class ggl(unittest.TestCase):
 
         self.public.login('ycadmin','111111')
         
-    def test_ggl_ggll(self):
-        u'''新增公告栏类别'''
-        print '----------新增公告栏类别用用例开始----------'
+    def test_case(self):
+        self.ggl_ggll()
+        self.ggl_gglbbj()
+        
+        self.ggl_gglbsc()
+        self.public.quit()
+        
+    def ggl_gglbxz(self):
+        u'''公告栏类别新增'''
+        print '----------公告栏类别新增用例开始----------'
         self.ggl.main_menu()
-        self.public.add()
-        self.ggl.notice_category_name(u'新增--假期类公告')
+        self.ggl.add()
+        #self.public.add()
+        self.ggl.name(u'新增--假期类公告')
         self.ggl.FuzerenName()
         self.ggl.Fuzerenuser()
         self.ggl.Faburen()
         self.ggl.Fabuuser()
         self.public.submit()
-        if self.ggl.category_add_list():
-            print u'新增公告类别成功'
-        else:
-            print u'新增公告类别失败'
+        self.ggl.check_list()
         
+    def ggl_gglbbj(self):
+        pass
+ 
+    def ggl_gglbsc(self):
+        pass        
         
             
-        self.public.quit()
+        
         
 if __name__ == "__main__":
     unittest.main()

@@ -103,10 +103,12 @@ class clgl_page(BasePage.Action):
         self.send_keys(u"加油升数", text)
         
     def StartTime(self,text):
-        self.send_keys(u'开始时间', text)
+        self.send_keys(u'车辆使用开始时间', text)
+        self.click(u'点击时间确定')
         
     def EndTime(self,text):
-        self.send_keys(u'结束时间', text)
+        self.send_keys(u'车辆使用结束时间', text)
+        self.click(u'点击时间确定')
         
     def Destination(self,text):
         self.send_keys(u'目的地',text)
